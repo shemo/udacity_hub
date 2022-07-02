@@ -1,0 +1,16 @@
+{
+  "name": "migrations_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migration:run": "db-migrate up"
+  },
+  "author": "Shimaa Adel <eng.sh.adel@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2"
+  }
+}

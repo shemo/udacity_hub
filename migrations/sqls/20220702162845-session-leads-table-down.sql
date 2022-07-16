@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS leads;
+DROP TABLE IF EXISTS session_leads;

@@ -1,21 +1,20 @@
-import { Session, SessionModel } from "../models/sessions";
-import express, { Request, Response } from "express";
-import { Verify } from "../helpers/jwtHelper";
-const addStudentToSession = async (req: Request, res: Response) => {
+import { NextFunction, Request, Response } from "express";
+import SessionAttendanceModel from "../models/StudentSession";
+
+const studentAttendanceModel = new SessionAttendanceModel();
+export const addStudentToSession = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    Verify(req);
-    const { student_id, session_id } = req.body;
-    const attendance = await SessionAttendanceModel.create({
-      student_id,
-      session_id,
+    const studentAttendance = await SessionAttendanceModel.create(req.body);
+    res.json({
+      status: "success",
+      data: { ...studentAttendance },
+      message: "Student Attendance Logged Successfully",
     });
-    res.send(attendance);
   } catch (error) {
-    const e = error as Error;
-    if (e.message.includes("Failed to add the student attendance")) {
-      res.status(500).json(e.message);
-    } else {
-      res.status(401).json(e.message);
-    }
+    next(error);
   }
 };
